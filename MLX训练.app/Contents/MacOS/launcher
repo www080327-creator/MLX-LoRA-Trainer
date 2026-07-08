@@ -1,0 +1,61 @@
+#!/bin/bash
+# MLX LoRA 训练工具 — 启动器
+# 检测 conda 环境并启动 Gradio Web 界面
+
+set -e
+
+APP_DIR="$(cd "$(dirname "$0")/../.." && pwd)"
+PY_SCRIPT="$APP_DIR/Contents/MacOS/mlx_lora_tool.py"
+PIDFILE="/tmp/mlx_train.pid"
+PORT=7878
+
+# 尝试多个可能的 conda 路径
+CONDA_BASE=""
+for p in "$HOME/miniforge3" "$HOME/miniconda3" "$HOME/anaconda3" "/opt/homebrew/anaconda3"; do
+    if [ -f "$p/bin/activate" ]; then
+        CONDA_BASE="$p"
+        break
+    fi
+done
+
+if [ -z "$CONDA_BASE" ]; then
+    osascript -e 'display dialog "未找到 Conda 环境！\n请先安装 Miniforge3:\nhttps://github.com/conda-forge/miniforge" buttons {"确定"} default button 1 with title "MLX 训练工具" with icon stop'
+    exit 1
+fi
+
+CONDA_SH="$CONDA_BASE/bin/activate"
+CONDA_PY="$CONDA_BASE/envs/llamafactory/bin/python3"
+
+# 检测 llamafactory 环境是否已创建
+if [ ! -f "$CONDA_PY" ]; then
+    osascript -e 'display dialog "正在首次安装依赖环境（约 5-10 分钟）…\n请勿关闭此窗口" buttons {"确定"} default button 1 with title "MLX 训练工具"'
+    "$CONDA_BASE/bin/conda" create -n llamafactory python=3.12 -y
+    # 安装依赖
+    source "$CONDA_SH" llamafactory
+    pip install gradio==5.50.0 mlx-lm matplotlib httpx
+fi
+
+# 杀掉旧进程
+if [ -f "$PIDFILE" ]; then
+    OLD_PID=$(cat "$PIDFILE")
+    kill "$OLD_PID" 2>/dev/null || true
+    sleep 1
+    kill -9 "$OLD_PID" 2>/dev/null || true
+    rm -f "$PIDFILE"
+fi
+/usr/sbin/lsof -ti:$PORT | /usr/bin/xargs kill -9 2>/dev/null || true
+sleep 1
+
+# 启动
+source "$CONDA_SH" llamafactory
+nohup "$CONDA_PY" "$PY_SCRIPT" >/dev/null 2>&1 &
+echo $! > "$PIDFILE"
+
+# 等待就绪后打开浏览器
+for i in $(seq 1 20); do
+    sleep 1
+    if /usr/sbin/lsof -i :$PORT 2>/dev/null | grep -q LISTEN; then
+        open "http://127.0.0.1:$PORT"
+        break
+    fi
+done
