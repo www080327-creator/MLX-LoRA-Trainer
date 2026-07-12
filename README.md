@@ -65,7 +65,7 @@
 
 ### 安装（仅需 2 步）/ Installation
 
-1. 前往 [Releases](https://github.com/PERRYGUO1215/MLX-LoRA-Trainer/releases) 下载最新 `.dmg` / Download the latest `.dmg`
+1. 前往 [Releases](https://github.com/www080327-creator/MLX-LoRA-Trainer/releases) 下载最新 `.dmg` / Download the latest `.dmg`
 2. 打开安装包，将 `MLX训练.app` 拖入「应用程序」文件夹即可启动 / Drag to Applications folder
 
 > ⚠️ 无需安装任何前置依赖，无需配置环境变量 / No dependencies required
