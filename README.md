@@ -74,11 +74,14 @@
 3. 首次打开：打开「**系统设置**」→「**隐私与安全性**」→ 往下滚动找到 `MLX训练` → 点击「**仍要打开**」 / First launch: System Settings → Privacy & Security → scroll down → "Open Anyway"
 
 > ⚠️ 无需安装任何前置依赖，无需配置环境变量 / No dependencies, no environment setup
-> ⚠️ 首次弹窗"无法验证"是正常现象（未签名应用），以上步骤只需操作一次 / Gatekeeper warning is normal for unsigned apps, only needed once
+> ⚠️ 首次弹窗"无法验证"是正常现象（未签名应用），以上步骤只需操作一次 [Gatekeeper warning is normal, only needed once]
+> 💡 如果系统设置里找不到"仍要打开"，可在终端运行： [If "Open Anyway" not found, run in Terminal:]
+> `xattr -d com.apple.quarantine /Applications/MLX训练.app`
 
 ### 3 步完成微调 / 3 Steps to Fine-tune
 
 1. 切换到 **📝 数据集** Tab，输入「问题」和「答案」 / Go to Dataset tab, enter Q&A
+   > 💡 也可直接导入仓库的 [示例数据集](examples/sample_dataset.json) 快速测试 [Or import the sample dataset to test quickly]
 2. 切换到 **🎯 训练** Tab，选择模型 → 选择数据集 → 创建适配器 / Select model → dataset → adapter
 3. 点击 **▶️ 开始训练**，实时查看 loss 曲线 / Click Start Training, watch loss curve
 
@@ -128,9 +131,9 @@ MLX-LoRA-Trainer/
 - ❌ PyTorch 格式（需用 MLX 转换工具） / PyTorch format (convert via MLX tools)
 
 ### 模型获取方式 [How to Get Models]
-- 推荐使用 [oMLX](https://github.com/Judn/omlx) 一键下载 [Recommended: one-click download with oMLX]
-- 或使用 `huggingface-cli download` 下载到 `~/.cache/huggingface/hub/` [Or use huggingface-cli download]
-- 工具自动扫描 `~/.cache/huggingface/hub/` 目录，下载后重启即可识别 [Auto-scans HF cache, restart to recognize]
+- 推荐使用 [oMLX](https://github.com/Judn/omlx) 一键下载（Mac 上的 MLX 模型商店） [Recommended: oMLX, a Mac MLX model store]
+- 或用命令行下载： `huggingface-cli download <模型名> --local-dir ~/.cache/huggingface/hub/models--<模型名>` [Or CLI: huggingface-cli download <model> --local-dir ...]
+- 工具自动扫描 `~/.cache/huggingface/hub/` 目录，下载后重启工具即可识别 [Auto-scans HF cache, restart app to recognize]
 
 ### 🌟 新手推荐模型 [Beginner Recommendations]
 入门建议从小模型开始，训练快、不挑配置： [Start with small models for fast training:]
@@ -149,6 +152,7 @@ MLX-LoRA-Trainer/
 **✅ 100% 本地运行，零网络请求，零数据上传。** / **100% local, zero network, zero upload.**
 
 - 训练全程在本地完成，不联网也可正常使用 [All training runs locally, works offline]
+- 工具本身不发起任何网络请求，模型下载需用户自行操作 [The app makes zero network requests; model downloads are user-initiated]
 - 无遥测、无埋点、无任何数据收集 [No telemetry, no tracking, no data collection]
 - 源码公开可审计：[src/mlx_lora_tool.py](src/mlx_lora_tool.py) [Source code open for audit]
 - 用户数据存储在 `~/.mlx_train/`，完全由你掌控 [Your data stays in ~/.mlx_train/, fully under your control]
@@ -209,7 +213,8 @@ MLX-LoRA-Trainer/
 训练完成后，LoRA 权重保存在 / After training, LoRA weights are saved at `~/.mlx_train/adapters/<adapter_name>/adapters.safetensors`。
 
 - 可在测试页面直接加载对话 / Load in Test tab for chatting
-- 可用 `mlx_lm fuse` 与基础模型合并 / Merge with base model via mlx_lm fuse
+- 可用 `mlx_lm fuse` 与基础模型合并 [Merge with base model: `mlx_lm fuse --model <base> --adapter-path <adapter>`]
+- Ollama 兼容路径：合并后通过 GGUF 转换工具导入 [Ollama path: fuse → convert to GGUF → import]
 - 格式为标准 safetensors，兼容 MLX 生态 / Standard safetensors format, MLX ecosystem compatible
 
 ---
@@ -223,7 +228,7 @@ MLX-LoRA-Trainer/
 
 | 芯片 [Chip] | 0.8B 模型 [Model] | 7B 模型 [Model] | 27B 模型 [Model] |
 |------|------|------|------|
-| M1 (16GB) | ✅ 流畅 [Smooth] | ⚠️ 可用 [OK] | ❌ 不足 [Insufficient] |
+| M1 (16GB) | ✅ 流畅 [Smooth] | ⚠️ 仅量化版 [Q4 only] | ❌ 不足 [Insufficient] |
 | M2 Max (32GB) | ✅ 流畅 [Smooth] | ✅ 流畅 [Smooth] | ⚠️ 可用 [OK] |
 | M3 Max (36GB) | ✅ 流畅 [Smooth] | ✅ 流畅 [Smooth] | ✅ 可用 [OK] |
 | M4 Max (48GB+) | ✅ 流畅 [Smooth] | ✅ 流畅 [Smooth] | ✅ 流畅 [Smooth] |
