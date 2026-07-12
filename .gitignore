@@ -1,9 +1,29 @@
-__pycache__/
-*.pyc
+# macOS
 .DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.Spotlight-V100
+.Trashes
+
+# Python
+__pycache__/
+*.py[cod]
 *.egg-info/
 dist/
 build/
-*.dmg
+
+# IDE
 .idea/
 .vscode/
+*.swp
+*.swo
+
+# Build artifacts
+*.dmg
+*.pkg
+
+# User data
+*.log
+/tmp/

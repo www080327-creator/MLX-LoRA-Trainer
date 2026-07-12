@@ -1,0 +1,26 @@
+---
+name: Bug 反馈 / Bug Report
+about: 报告一个问题 / Report a bug
+title: "[Bug] "
+labels: bug
+---
+
+## 问题描述 / Description
+<!-- 请清晰描述你遇到的问题 / Describe the issue -->
+
+
+## 复现步骤 / Steps to Reproduce
+1. 
+2. 
+3. 
+
+## 期望行为 / Expected Behavior
+
+
+## 环境信息 / Environment
+- macOS 版本 [macOS version]：
+- 芯片型号（M1/M2/M3/M4）[Chip model]：
+- App 版本 [App version]：
+
+## 截图 / Screenshots
+<!-- 如果有 / If available -->
