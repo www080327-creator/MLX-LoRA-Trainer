@@ -80,7 +80,7 @@
 
 ### 3 步完成微调 / 3 Steps to Fine-tune
 
-1. 切换到 **📝 数据集** Tab，输入「问题」和「答案」 / Go to Dataset tab, enter Q&A
+1. 切换到 **📝 数据集** Tab，输入名称 → 点击「创建」→ 编辑问题和答案 / Go to Dataset tab, enter name → Create → edit Q&A
    > 💡 也可直接导入仓库的 [示例数据集](examples/sample_dataset.json) 快速测试 [Or import the sample dataset to test quickly]
 2. 切换到 **🎯 训练** Tab，选择模型 → 选择数据集 → 创建适配器 / Select model → dataset → adapter
 3. 点击 **▶️ 开始训练**，实时查看 loss 曲线 / Click Start Training, watch loss curve
@@ -97,7 +97,6 @@
 MLX-LoRA-Trainer/
 ├── src/                    # 核心源码 / Core source
 │   └── mlx_lora_tool.py    # 主程序 (~600 lines Python)
-├── MLX训练.app/            # macOS app bundle
 ├── scripts/                # 打包脚本 / Build scripts
 ├── examples/               # 示例数据集 / Sample dataset
 │   └── sample_dataset.json # 10条示例，可直接导入测试
@@ -114,7 +113,7 @@ MLX-LoRA-Trainer/
 ### 支持的基础模型 / Supported Base Models
 理论上支持所有能在 MLX 上运行的 HuggingFace 格式模型，实测包括： / Supports all HuggingFace-format models runnable on MLX, tested includes:
 
-| 模型 [Model] | 参数量 [Params] | 推荐内存 [Recommended RAM] |
+| 模型 [Model]（小参数量版本 8GB 可运行） [Small versions work with 8GB] | 参数量 [Params] | 推荐内存 [Recommended RAM] |
 |------|------|------|
 | Qwen2.5 / Qwen3 | 0.5B ~ 72B | 16GB+ |
 | Llama 3 / 3.1 | 1B ~ 70B | 16GB+ |
