@@ -5,18 +5,14 @@
     <key>CFBundleExecutable</key>
     <string>launcher</string>
     <key>CFBundleIdentifier</key>
-    <string>com.mlx-trainer.app</string>
+    <string>com.perry.mlx-train</string>
     <key>CFBundleName</key>
-    <string>MLX 训练工具</string>
-    <key>CFBundleDisplayName</key>
-    <string>MLX 训练工具</string>
-    <key>CFBundleVersion</key>
-    <string>1.0.0</string>
+    <string>MLX训练</string>
     <key>CFBundleShortVersionString</key>
-    <string>1.0</string>
+    <string>2.0.0</string>
+    <key>CFBundleVersion</key>
+    <string>2.0.0</string>
     <key>CFBundlePackageType</key>
     <string>APPL</string>
-    <key>LSMinimumSystemVersion</key>
-    <string>15.0</string>
 </dict>
 </plist>

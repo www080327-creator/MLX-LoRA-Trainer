@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 """
-MLX LoRA 训练工具 v9 — 输出管理 + 防呆测试 + mlx_lm 聊天
+MLX LoRA 训练工具 v2.0 — 输出管理 + 防呆测试 + mlx_lm 聊天
 """
 
 import gradio as gr
-import subprocess, threading, os, time, re, json, httpx, shutil, socket
+import subprocess, threading, os, time, re, json, shutil, socket
 from pathlib import Path
 
 CONDA_SH = "source /Users/perry_guo/miniforge3/bin/activate llamafactory"
