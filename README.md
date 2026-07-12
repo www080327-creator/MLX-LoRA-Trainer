@@ -213,7 +213,7 @@ MLX-LoRA-Trainer/
 训练完成后，LoRA 权重保存在 / After training, LoRA weights are saved at `~/.mlx_train/adapters/<adapter_name>/adapters.safetensors`。
 
 - 可在测试页面直接加载对话 / Load in Test tab for chatting
-- 可用 `mlx_lm fuse` 与基础模型合并 [Merge with base model: `mlx_lm fuse --model <base> --adapter-path <adapter>`]
+- 可用 `mlx-lm fuse` 与基础模型合并 [Merge with base model: `mlx-lm fuse --model <base> --adapter-path <adapter>`]
 - Ollama 兼容路径：合并后通过 GGUF 转换工具导入 [Ollama path: fuse → convert to GGUF → import]
 - 格式为标准 safetensors，兼容 MLX 生态 / Standard safetensors format, MLX ecosystem compatible
 
@@ -222,7 +222,7 @@ MLX-LoRA-Trainer/
 ## 📋 系统要求 / System Requirements
 
 - **macOS 13.0+**（Apple Silicon，M1/M2/M3/M4）
-- **至少 16GB 内存**（推荐 32GB+ 以运行 7B+ 模型） / **16GB+ RAM** (32GB+ recommended for 7B+ models)
+- **最低 8GB 内存**（仅支持 1B 以下小模型），**推荐 16GB+**，32GB+ 流畅运行 7B+ 模型 [**8GB+ RAM** (1B- models only), **16GB+ recommended**, 32GB+ for 7B+ models]
 
 ### 性能参考 / Performance Reference
 
@@ -248,7 +248,7 @@ MLX-LoRA-Trainer/
 | **显存不足报错？** / **Out of memory?** | 减少 batch_size / Reduce batch size、减小文本长度、换更小的模型 |
 | **模型加载失败？** / **Model load failed?** | 检查下载完整性 / Check download，磁盘空间是否充足 |
 | **LoRA 权重怎么导出？** / **How to export weights?** | 在 `~/.mlx_train/adapters/` 目录，标准 safetensors 格式 |
-| **能和 Ollama 一起用吗？** / **Compatible with Ollama?** | 需用 / Requires `mlx_lm fuse` 合并后转换，暂不直接兼容 |
+| **能和 Ollama 一起用吗？** / **Compatible with Ollama?** | 需用 / Requires `mlx-lm fuse` 合并后转换，暂不直接兼容 |
 
 ---
 
@@ -269,7 +269,7 @@ MLX-LoRA-Trainer/
 |------|------|
 | 🖥️ 原生桌面应用 [Native Desktop] | pywebview 窗口，无需浏览器 [No browser needed] |
 | 🎯 LoRA/QLoRA 训练 [Training] | 支持 Q2~Q8 量化级别 [Q2-Q8 quantization] |
-| 💬 测试对话 [Chat Test] | 内置 mlx_lm generate [Built-in chat] |
+| 💬 测试对话 [Chat Test] | 内置 mlx-lm generate [Built-in chat] |
 | 📝 数据集管理 [Dataset] | GUI 编辑 + JSON 导入 [GUI edit + JSON import] |
 | 📈 Loss 曲线 [Loss Curve] | 实时可视化 [Real-time visualization] |
 | 🌐 中英双语 [Bilingual] | 全部 UI + 文档 [Full UI + docs] |
