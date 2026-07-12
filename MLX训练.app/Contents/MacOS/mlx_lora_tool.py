@@ -217,6 +217,7 @@ def run_train(model, data_dir, adapter_dir, layers, batch, iters, lr, seq, my_id
            f" --num-layers {layers} --batch-size {batch}"
            f" --iters {iters} --learning-rate {lr}"
            f" --steps-per-report 1 --steps-per-eval {max(5,iters//3)}"
+           f" --save-every 5"
            f" --adapter-path \"{adapter_dir}\" --max-seq-length {seq}")
     train_proc = subprocess.Popen(cmd, shell=True, executable="/bin/bash",
                                   stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
