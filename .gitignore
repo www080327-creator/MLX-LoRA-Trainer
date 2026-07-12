@@ -27,3 +27,6 @@ build/
 # User data
 *.log
 /tmp/
+
+# macOS app bundle (distributed via Releases only)
+*.app
