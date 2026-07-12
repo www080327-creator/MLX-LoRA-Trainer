@@ -19,7 +19,8 @@ fi
 sleep 1
 
 # 启动（pywebview 原生窗口，无需浏览器）
-/Users/perry_guo/miniforge3/envs/llamafactory/bin/python3 "/Users/perry_guo/Desktop/MLX训练.app/Contents/MacOS/mlx_lora_tool.py" &
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+/Users/perry_guo/miniforge3/envs/llamafactory/bin/python3 "$SCRIPT_DIR/mlx_lora_tool.py" &
 echo $! > "$PIDFILE"
 
 wait
