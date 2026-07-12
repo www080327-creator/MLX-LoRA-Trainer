@@ -127,9 +127,32 @@ MLX-LoRA-Trainer/
 - ❌ `.gguf` 格式（需用 oMLX 转换） / .gguf format (convert with oMLX)
 - ❌ PyTorch 格式（需用 MLX 转换工具） / PyTorch format (convert via MLX tools)
 
-### 模型获取方式 / How to Get Models
-- 推荐使用 [oMLX](https://github.com/Judn/omlx) 一键下载 / Recommended: one-click download with oMLX
-- 或使用 `huggingface-cli download` 下载到 `~/.cache/huggingface/hub/` / Or use huggingface-cli download to ~/.cache/huggingface/hub/
+### 模型获取方式 [How to Get Models]
+- 推荐使用 [oMLX](https://github.com/Judn/omlx) 一键下载 [Recommended: one-click download with oMLX]
+- 或使用 `huggingface-cli download` 下载到 `~/.cache/huggingface/hub/` [Or use huggingface-cli download]
+- 工具自动扫描 `~/.cache/huggingface/hub/` 目录，下载后重启即可识别 [Auto-scans HF cache, restart to recognize]
+
+### 🌟 新手推荐模型 [Beginner Recommendations]
+入门建议从小模型开始，训练快、不挑配置： [Start with small models for fast training:]
+
+| 模型 [Model] | 参数量 [Size] | 最低内存 [Min RAM] | 推荐理由 [Why] |
+|------|------|------|------|
+| Qwen2.5-0.5B | 0.5B | 8GB | 最快跑通流程，5 分钟看到效果 [Fastest, see results in 5 min] |
+| Qwen3-0.8B | 0.8B | 8GB | 效果比 0.5B 好，速度依然很快 [Better quality, still fast] |
+| Qwen2.5-1.5B | 1.5B | 16GB | 入门最佳平衡点 [Best beginner balance] |
+| Llama-3.2-1B | 1B | 16GB | Meta 官方模型，社区资源多 [Official Meta model, rich community] |
+
+---
+
+## 🔒 隐私声明 / Privacy Statement
+
+**✅ 100% 本地运行，零网络请求，零数据上传。** / **100% local, zero network, zero upload.**
+
+- 训练全程在本地完成，不联网也可正常使用 [All training runs locally, works offline]
+- 无遥测、无埋点、无任何数据收集 [No telemetry, no tracking, no data collection]
+- 源码公开可审计：[src/mlx_lora_tool.py](src/mlx_lora_tool.py) [Source code open for audit]
+- 用户数据存储在 `~/.mlx_train/`，完全由你掌控 [Your data stays in ~/.mlx_train/, fully under your control]
+- 后续版本升级不会覆盖或删除已有数据 / Future upgrades won't overwrite or delete existing data
 
 ---
 
@@ -235,11 +258,31 @@ MLX-LoRA-Trainer/
 
 ## 🗺️ 路线图 / Roadmap
 
-- [ ] v2.1：学习率调度器 / LR Scheduler（Cosine/Linear Decay）
-- [ ] v2.1：启动加载动画 / Loading animation
-- [ ] v2.2：断点续训 / Resume training
-- [ ] v2.3：LoRA 权重合并 / LoRA weight fusion
-- [ ] 开源社区：Apple 开发者签名 / Apple Developer signing（消除 Gatekeeper 弹窗 / eliminate Gatekeeper warning）
+### ✅ 已实现 [Implemented]
+
+| 功能 [Feature] | 说明 [Description] |
+|------|------|
+| 🖥️ 原生桌面应用 [Native Desktop] | pywebview 窗口，无需浏览器 [No browser needed] |
+| 🎯 LoRA/QLoRA 训练 [Training] | 支持 Q2~Q8 量化级别 [Q2-Q8 quantization] |
+| 💬 测试对话 [Chat Test] | 内置 mlx_lm generate [Built-in chat] |
+| 📝 数据集管理 [Dataset] | GUI 编辑 + JSON 导入 [GUI edit + JSON import] |
+| 📈 Loss 曲线 [Loss Curve] | 实时可视化 [Real-time visualization] |
+| 🌐 中英双语 [Bilingual] | 全部 UI + 文档 [Full UI + docs] |
+| 💬 大白话报错 [Plain Errors] | 中文解释 + 解决方案 [Chinese explanation + fix] |
+| 🔒 隐私安全 [Privacy] | 全本地运行，零网络 [100% local, zero network] |
+| 🔍 源码公开 [Open Source] | src/mlx_lora_tool.py 可审计 [Auditable] |
+| 📋 新手引导 [Onboarding] | 示例数据集 + 入门模型推荐 [Sample dataset + model recs] |
+
+### ⏳ 计划中 [Planned]
+
+| 功能 [Feature] | 版本 [Version] | 说明 [Description] |
+|------|------|------|
+| 📉 学习率调度器 [LR Scheduler] | v2.1 | Cosine/Linear Decay，训练更稳定 [More stable training] |
+| 🌀 启动动画 [Loading Screen] | v2.1 | 消除启动白屏 [Eliminates white screen at launch] |
+| 🔄 断点续训 [Resume Training] | v2.2 | 中断后从 checkpoint 继续 [Continue from checkpoint] |
+| 🔗 LoRA 合并 [Weight Fusion] | v2.3 | 与基础模型合并导出 [Merge with base model] |
+| ✍️ Apple 签名 [Developer Signing] | 社区 | 消除 Gatekeeper 弹窗 [Eliminate Gatekeeper warning] |
+| 📤 数据集导入/导出 [Dataset Export] | 待定 | 标准格式导出 [Export standard format] |
 
 ---
 
