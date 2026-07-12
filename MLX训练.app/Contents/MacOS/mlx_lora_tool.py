@@ -186,6 +186,8 @@ def delete_adapter(name):
 def parse_training_error(log_lines):
     """将原始训练日志中的错误转换为简单的中英双语提示"""
     text = "".join(log_lines)
+    if not text.strip():
+        return "训练进程无任何输出，可能是环境问题或命令执行失败 / No output from training process, possible env or command issue"
     # 层数超限
     m = re.search(r'Requested to train (\d+) layers but the model only has (\d+) layers', text)
     if m:
