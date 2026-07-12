@@ -416,11 +416,26 @@ def mlx_chat(msg, history, model_choice, custom_path, adapter_name):
                               input=prompt, capture_output=True, text=True, timeout=120)
         reply = proc.stdout.strip() or "（无输出 / No output）"
         if proc.returncode != 0:
-            reply = f"❌ 生成错误 / Generation error:\n{proc.stderr[:200]}"
+            err_text = proc.stderr.strip()
+            if 'FileNotFoundError' in err_text or 'No such file' in err_text:
+                reply = (f"### ❌ 适配器文件缺失 / Adapter file missing\n\n"
+                         f"**可能原因**: 适配器「{adapter_name}」的权重文件不存在\n"
+                         f"**Likely cause**: Weight file not found for adapter\n\n"
+                         f"**解决**: 请重新训练或检查适配器目录\n"
+                         f"**Solution**: Re-train or check adapter directory\n\n"
+                         f"<details><summary>原始错误 / Raw error</summary>\n\n```\n{err_text[:500]}\n```\n</details>")
+            elif 'out of memory' in err_text.lower():
+                reply = (f"### ❌ 显存不足 / Out of Memory\n\n"
+                         f"**解决**: 尝试使用更小的模型或减少 max-tokens\n"
+                         f"**Solution**: Try a smaller model or reduce max-tokens\n\n"
+                         f"<details><summary>原始错误 / Raw error</summary>\n\n```\n{err_text[:500]}\n```\n</details>")
+            else:
+                reply = (f"### ❌ 生成错误 / Generation error\n\n"
+                         f"<details><summary>原始错误 / Raw error</summary>\n\n```\n{err_text[:500]}\n```\n</details>")
     except subprocess.TimeoutExpired:
-        reply = "❌ 生成超时 / Generation timed out (120s)"
+        reply = "### ❌ 生成超时 / Generation timed out (120s)\n\n**解决**: 减小 max-tokens 或检查模型是否正常加载"
     except Exception as e:
-        reply = f"❌ 错误 / Error: {str(e)[:200]}"
+        reply = f"### ❌ 错误 / Error: {str(e)[:200]}"
 
     history.append({"role":"user","content":msg})
     history.append({"role":"assistant","content":reply})
